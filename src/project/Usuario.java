@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Usuario {
-	private static Integer id = 0;
+	private static Integer id = 1;
 	
 	private Integer id_usuario;
 	private String nombre;
@@ -15,7 +15,7 @@ public class Usuario {
 	public Usuario(String nombre, String mail, String pass) throws PasswordInvalida, EmailInvalido {
 		setPassword(pass);
 		setEmail(mail);
-		this.id_usuario = ++id;
+		this.id_usuario = id++;
 		this.nombre = nombre;
 		this.lista = new TreeSet<VideoJuego>();
 	} 
@@ -50,9 +50,9 @@ public class Usuario {
 
 	
 	private Boolean validarPassword(String pass) throws PasswordInvalida {	
-	Boolean respuesta = pass.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z0-9])\\S.{8,}$");
+	Boolean respuesta = pass.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}.+$");
 		
-	if(!respuesta){
+	if(!respuesta || pass.contains(" ")){
 		throw new PasswordInvalida();
 	} 
 	return respuesta;
@@ -72,7 +72,7 @@ public class Usuario {
 		Boolean respuesta = false;
 
 		for(VideoJuego juego : lista){
-			if(juego.getNombre().toUpperCase().equals(nombre.toUpperCase())){
+			if(juego.getNombre().equalsIgnoreCase(nombre)){
 				lista.remove(juego);
 				respuesta = true;
 			}
@@ -81,7 +81,16 @@ public class Usuario {
 		if(!respuesta){
 			throw new NoEstaEnLaLista();
 		}
-
 	}
+	
+	public Integer getCantidadDeJuegosEnLaLista() {
+		return this.lista.size();
+	}
+
+	public Set<VideoJuego> getLista() {
+		return lista;
+	}
+	
+	
 
 }
