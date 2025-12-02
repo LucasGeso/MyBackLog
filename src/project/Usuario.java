@@ -10,18 +10,26 @@ public class Usuario {
 	private String nombre;
 	private String password;
 	private String eMail;
-	private Set<VideoJuego> lista;
+	private Set<Tarea> lista;
 
 	public Usuario(String nombre, String mail, String pass) throws PasswordInvalida, EmailInvalido {
 		setPassword(pass);
 		setEmail(mail);
 		this.id_usuario = id++;
 		this.nombre = nombre;
-		this.lista = new TreeSet<VideoJuego>();
+		this.lista = new TreeSet<Tarea>();
 	} 
 	
 	public Integer getId_usuario() {
 		return id_usuario;
+	}
+	
+	public Integer getCantidadDeTareasEnLaLista() {
+		return this.lista.size();
+	}
+
+	public Set<Tarea> getLista() {
+		return lista;
 	}
 
 	private void setEmail(String mail) throws EmailInvalido {
@@ -59,19 +67,19 @@ public class Usuario {
 	}
 
 	
-	public void agregarUnJuegoATuLista(VideoJuego juego) throws JuegoYaAgregado {
+	public void agregarUnaTareaATuLista(Tarea juego) throws TareaYaAgregada {
 		Boolean respuesta = lista.add(juego);
 
 		if(!respuesta){
-			throw new JuegoYaAgregado();
+			throw new TareaYaAgregada();
 		}
 	}
 	
 
-	public void borrarJuegoDeTuLista(String nombre) throws NoEstaEnLaLista {
+	public void borrarTareaDeTuLista(String nombre) throws NoEstaEnLaLista {
 		Boolean respuesta = false;
 
-		for(VideoJuego juego : lista){
+		for(Tarea juego : lista){
 			if(juego.getNombre().equalsIgnoreCase(nombre)){
 				lista.remove(juego);
 				respuesta = true;
@@ -83,13 +91,7 @@ public class Usuario {
 		}
 	}
 	
-	public Integer getCantidadDeJuegosEnLaLista() {
-		return this.lista.size();
-	}
 
-	public Set<VideoJuego> getLista() {
-		return lista;
-	}
 	
 	
 

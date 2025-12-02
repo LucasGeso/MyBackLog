@@ -83,39 +83,38 @@ class UsuarioTest {
 	}
 	
 	@Test
-	void queSePuedaAgregarUnJuegoALaListaDelUsuarioCorrectamente() throws PasswordInvalida, EmailInvalido, JuegoYaAgregado {
-		VideoJuego juego = new VideoJuego(1, "Ghost of Tsushima", 35, Dificultad.FÁCIL, "2018-08-20");
-		user1.agregarUnJuegoATuLista(juego);
+	void queSePuedaAgregarUnaTareaALaListaDelUsuarioCorrectamente() throws PasswordInvalida, EmailInvalido, TareaYaAgregada {
+		Tarea juego = new Tarea("Ghost of Tsushima", Dificultad.FÁCIL, "2018-08-20");
+		user1.agregarUnaTareaATuLista(juego);
 		
-		Iterator<VideoJuego> iterador = user1.getLista().iterator();
+		Iterator<Tarea> iterador = user1.getLista().iterator();
 		
 		assertEquals(juego, iterador.next());
 	}
 	
 	@Test
-	void queSePuedaComprobarLaCantidadDeJuegosQuePoseeLaLista() throws PasswordInvalida, EmailInvalido, JuegoYaAgregado {
-		VideoJuego juego = new VideoJuego(1, "Ghost of Tsushima", 35, Dificultad.FÁCIL, "2018-08-20");
-		user1.agregarUnJuegoATuLista(juego);
+	void queSePuedaComprobarLaCantidadDeTareasQuePoseeLaLista() throws PasswordInvalida, EmailInvalido, TareaYaAgregada {
+		Tarea juego = new Tarea("Ghost of Tsushima", Dificultad.FÁCIL, "2018-08-20");
+		user1.agregarUnaTareaATuLista(juego);
 		
-		assertEquals(1, user1.getCantidadDeJuegosEnLaLista());
+		assertEquals(1, user1.getCantidadDeTareasEnLaLista());
 	}
 	
 	@Test
-	void queSePuedaBorrarUnJuegoEnLaListaDelUsuarioCorrectamente() throws PasswordInvalida, EmailInvalido, JuegoYaAgregado, NoEstaEnLaLista {
-		VideoJuego juego = new VideoJuego(1, "Ghost of Tsushima", 35, Dificultad.FÁCIL, "2018-08-20");
-		user1.agregarUnJuegoATuLista(juego);
-		user1.borrarJuegoDeTuLista("ghost of tsushima");
-		assertEquals(0, user1.getCantidadDeJuegosEnLaLista());
+	void queSePuedaBorrarUnaTareaEnLaListaDelUsuarioCorrectamente() throws PasswordInvalida, EmailInvalido, TareaYaAgregada, NoEstaEnLaLista {
+		Tarea juego = new Tarea("Ghost of Tsushima", Dificultad.FÁCIL, "2018-08-20");
+		user1.agregarUnaTareaATuLista(juego);
+		user1.borrarTareaDeTuLista("ghost of tsushima");
+		assertEquals(0, user1.getCantidadDeTareasEnLaLista());
 	}
 	
 	@Test
-	void queNoSePuedaAgregarDosJuegosConElMismoIdALaLista() throws PasswordInvalida, EmailInvalido, JuegoYaAgregado {
-		VideoJuego juego1 = new VideoJuego(1, "Ghost of Tsushima", 35, Dificultad.FÁCIL, "2018-08-20");
-		VideoJuego juego2 = new VideoJuego(1, "Sekiro: Shadow Die Twice", 40, Dificultad.DIFÍCIL, "2016-07-11");
-		user1.agregarUnJuegoATuLista(juego1);
+	void queNoSePuedaAgregarDosTareasConElMismoIdALaLista() throws PasswordInvalida, EmailInvalido, TareaYaAgregada {
+		Tarea juego1 = new Tarea("Ghost of Tsushima", Dificultad.FÁCIL, "2018-08-20");
+		user1.agregarUnaTareaATuLista(juego1);
 		
-		assertThrows(JuegoYaAgregado.class, () -> {
-			user1.agregarUnJuegoATuLista(juego2);
+		assertThrows(TareaYaAgregada.class, () -> {
+			user1.agregarUnaTareaATuLista(juego1);
 		});
 		
 	}
