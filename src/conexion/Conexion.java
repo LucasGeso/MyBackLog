@@ -10,16 +10,16 @@ public class Conexion {
     private static final String USER = "root";
     private static final String PASSWORD = "Metallica92!";
     
-    public static Connection getConexion() {
+    public static Connection getConexion() throws SQLException {
         Connection con = null;
-
-        try {
+/*
+        try {*/
             con = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Conexión exitosa a MySQL!");
+           /* System.out.println("Conexión exitosa a MySQL!");
         } catch (SQLException e) {
             System.out.println("Error en la conexión: " + e.getMessage());
         }
-
+*/
         return con;
     }
 

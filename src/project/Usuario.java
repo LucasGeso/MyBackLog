@@ -24,6 +24,18 @@ public class Usuario {
 		return id_usuario;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String geteMail() {
+		return eMail;
+	}
+
 	public Integer getCantidadDeTareasEnLaLista() {
 		return this.lista.size();
 	}
